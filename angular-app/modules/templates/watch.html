@@ -1,0 +1,82 @@
+<section id="media-{{video.data.items[0].id}}" class="mediapage" ng-controller="watchCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 video-content">
+                <div class="video-player">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <video width="800" height="450" id="player1">
+                            <source type="video/youtube" ng-src="{{video.src}}" />
+                        </video>
+                    </div>
+                 </div><!--/#video-player -->
+                <div class="video-info" itemscope itemtype="http://schema.org/VideoObject">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2 itemprop="name">{{video.data.items[0].snippet.title}} <small>{{video.data.items[0].snippet.publishedAt | timeAgo}} </small></h2>
+                            <meta itemprop="thumbnail" content="{{video.data.items[0].snippet.thumbnails.medium.url}}" />
+                        </div>
+                        <div class="col-sm-4 stats" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                            <meta itemprop="ratingValue" content="5" />
+                            <meta itemprop="reviewCount" content="117397" />
+                            {{video.data.items[0].statistics.viewCount | number:0}}<small> views</small>
+                            <p>
+                                {{video.data.items[0].statistics.likeCount | number:0}} Likes &nbsp;
+                                {{video.data.items[0].statistics.dislikeCount | number:0}} Dislikes
+                            </p>
+                        </div><!--/.stats -->
+                    </div>
+                </div><!--/.video-info -->
+                <div class="video-share row">
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" value="/watch/{{video.data.items[0].id}}">
+                    </div>
+                    <div class="col-md-7 text-right">
+                        <a ng-href="https://www.facebook.com/sharer.php?u=http://www.bluerayvids.com/watch/{{video.data.items[0].id}}" class="btn btn-facebook ushare">Share</a>
+                        <a ng-href="https://twitter.com/share?url=http://www.bluerayvids.com/watch/{{video.data.items[0].id}}&amp;text=Teaser Trailer: Pirates of the Caribbean: Dead Men Tell No Tales" class="btn btn-twitter ushare">Tweet</a>
+                    </div>
+                </div>
+                <!-- /.video-share -->
+                <div class="video-description">
+                    {{video.data.items[0].snippet.description}}
+                </div>
+                <div id="comments">
+                    <h2 class="header">Comments</h2>
+                    <iframe id="f159c0963c9e2b"
+                            name="f2a4d54d9a26cb4"
+                            scrolling="no"
+                            title="Facebook Social Plugin"
+                            class="fb_ltr fb_iframe_widget_lift"
+                            src="https://www.facebook.com/plugins/comments.php?api_key=&amp;channel_url=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FP5DLcu0KGJB.js%3Fversion%3D42%23cb%3Df11d8c8703f3c98%26domain%3Dwww.bluerayvids.com%26origin%3Dhttp%253A%252F%252Fwww.bluerayvids.com%252Ff2cfe6585cc8ba%26relation%3Dparent.parent&amp;colorscheme=light&amp;href=http%3A%2F%2Fwww.bluerayvids.com%2Fwatch%3F%3DuS0nZt1Rtps&amp;locale=en_US&amp;numposts=4&amp;sdk=joey&amp;skin=light&amp;width=100%25" style="border: none; overflow: hidden; height: 235px; width: 100%;">
+
+                    </iframe>
+                    <div id="fb-root"></div>
+                    <script>(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&version=v2.0";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+                    <div class="fb-comments" data-href="/watch?={{video.data.items[0].id}}" data-num-posts="4" data-width="100%" data-colorscheme="light" ></div>
+                </div>
+                <!-- /#comments -->
+            </div><!--/.content-->
+            <div class="col-md-4 video-sidebar">
+                <h3>Related Videos</h3>
+                <ul class="nav-sidebar">
+                    <li class='video' ng-repeat="vid in video.related track by $index" id='video-{{related.id.videoId}}'>
+                        <div class='mediathumb'>
+                            <a ng-href='watch/{{vid.id.videoId}}/{{vid.titleLink}}' title='{{vid.snippet.description}}'>
+                                <img ng-src='{{vid.snippet.thumbnails.medium.url}}' alt='{{vid.snippet.title}}'>
+                            </a>
+                        </div>
+                        <h4><a ng-href='watch/{{vid.id.videoId}}/{{vid.titleLink}}' title='{{vid.snippet.title}}' class='medialink'>{{vid.snippet.description | cut:true:100:' ...'}} ...</a> <span class='time'>4 months ago </span></h4>
+                        <a class='mediaauthor' href=''>by {{vid.snippet.channelTitle}}
+                            <span class='time'>{{vid.snippet.publishedAt | timeAgo}} </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
