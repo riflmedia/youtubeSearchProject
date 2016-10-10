@@ -3,3 +3,4 @@ angular-app/node_modules
 .idea/workspace.xml
 angular-app/.idea/
 .idea/
+angular-app/build
