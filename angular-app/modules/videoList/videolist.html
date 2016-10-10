@@ -1,5 +1,5 @@
-<ul class="media">
-    <li ng-repeat="video in list track by $index" class="video" id="video-{{video.id.videoId}}">
+<ul class="media-list">
+    <li ng-repeat="video in list track by $index" class="video-list" id="video-{{video.id.videoId}}">
         <div class="mediathumb">
             <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}">
                 <img ng-src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.id.videoId}}">
@@ -8,10 +8,14 @@
         <h4>
             <a ng-href="watch/{{video.id.videoId}}/{{video.titleLink}}" title="{{video.snippet.description}}" class="medialink">{{video.snippet.description}}</a>
         </h4>
-        <a class="mediaauthor" ng-href="user/{{video.snippet.channelId}}/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle}}...
-            <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
-        </a>
-        <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
+        <div class="mediaauthor">
+            <a  ng-href="user/{{video.snippet.channelId}}/{{video.snippet.channelTitle}}">by {{video.snippet.channelTitle | cut:true:10:' ...'}}
+                <span class="time">{{video.snippet.publishedAt | timeAgo}}</span>
+            </a>
+        </div>
+        <div class="stat">
+            <span class="mediaviews">{{video.statistics.viewCount | number:0}} views</span>
+        </div>
     </li>
 </ul>
 
